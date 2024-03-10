@@ -20,7 +20,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'dev-sec-ops-cicd-pipeline-project-one', url: 'https://github.com/awanmbandi/realworld-microservice-project.git'
+                git branch: 'dev-sec-ops-cicd-pipeline-project-one', url: 'https://github.com/basalonje2/realworld-microservice-project.git'
             }
         }
         stage('Install Dependencies') {
@@ -84,7 +84,7 @@ pipeline{
         stage('ZAP Dynamic Testing | DAST') {
             steps {
                 sshagent(['OWASP-Zap-Credential']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.15.151.251 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://18.188.161.121:30000/" || true'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@3.14.128.95 "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://192.168.1.1:30000/" || true'
                                                         //JENKINS_PUBLIC_IP                                                      //EKS_WORKER_NODE_IP_ADDRESS:3000
                 }
             }
@@ -109,7 +109,7 @@ pipeline{
     post {
     always {
         echo 'Slack Notifications.'
-        slackSend channel: '#general', //update and provide your channel name
+        slackSend channel: '#cicd-with-awambandi', //update and provide your channel name
         color: COLOR_MAP[currentBuild.currentResult],
         message: "*${currentBuild.currentResult}:* Job Name '${env.JOB_NAME}' build ${env.BUILD_NUMBER} \n Build Timestamp: ${env.BUILD_TIMESTAMP} \n Project Workspace: ${env.WORKSPACE} \n More info at: ${env.BUILD_URL}"
     }
