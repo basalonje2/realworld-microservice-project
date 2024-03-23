@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: reddit-clone
-        image: Basame/reddit:latest
+        image: basalonje2@gmail.com/reddit:latest
         ports:
         - containerPort: 3000

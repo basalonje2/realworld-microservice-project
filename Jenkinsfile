@@ -59,15 +59,15 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'DockerHub-Credential', toolName: 'Docker'){
                        sh "docker build -t reddit ."
-                       sh "docker tag reddit Basame/reddit:latest "
-                       sh "docker push Basame/reddit:latest "
+                       sh "docker tag reddit basalonje2@gmail.com/reddit:latest "
+                       sh "docker push basalonje2@gmail.com/reddit:latest "
                     }
                 }
             }
         }
         stage("Trivy App Image Scan"){
             steps{
-                sh "trivy image Basame/reddit:latest > trivy_image_analysis_report.txt"
+                sh "trivy image basalonje2@gmail.com/reddit:latest > trivy_image_analysis_report.txt"
             }
         }
         stage('Deploy to K8S Stage Environment'){
