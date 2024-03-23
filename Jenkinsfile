@@ -74,7 +74,7 @@ pipeline{
             steps{
                 script{
                     withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'Kubernetes-Credential', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                       sh 'kubectl apply -f deploy-configs/test-env/test-namespace.yml'
+                    //    sh 'kubectl apply -f deploy-configs/test-env/test-namespace.yml'
                        sh 'kubectl apply -f deploy-configs/test-env/deployment.yml'
                        sh 'kubectl apply -f deploy-configs/test-env/service.yml'  //NodePort Service
                   }
